@@ -15,6 +15,7 @@ angular
 		  
 		  table.saveUsuario = function(alumno) {
 		    usuariosService.guardarUsuario(alumno);
+		    location.reload(true);
 		  }
 
 		  table.saveAlumno = function(alumno) {
@@ -45,8 +46,11 @@ angular
 		  				apellido: null,
 		  				email: null,
 		  				permiso: null,
-		  				estado: null
+		  				estado: null,
+		  				usuarioid: null,
 		  			}
+		  			$scope.permisos = ['Administrador','Docente'];
+		  			$scope.estados = ['Activo','Inactivo'];
 		  			break;
 
 		  		case 'docenteasignado':
@@ -197,8 +201,8 @@ angular
 						$scope.modal.email = data.email;
 						$scope.modal.permiso = data.permiso;
 						$scope.modal.estado = data.estado;
+						$scope.modal.usuarioid = data.id;
 						$('#modal-usuario').modal('show');
-
 						break;
 
 					case 'docenteasignado':
@@ -235,7 +239,6 @@ angular
 						$scope.modal.alumno.nombre = data.alumno.nombre;
 						$scope.modal.alumno.apellido = data.alumno.apellido;
 						$scope.modal.materia.desc_mat = data.materia.desc_mat;
-						$scope.modal.cant_faltas_act = data.cant_faltas_act;
 						$('#modal-inscripto').modal('show');
 						break;
 						
@@ -252,20 +255,11 @@ angular
 			}
 		}
 
-	    // delete alumno record
 	    table.confirmDelete = function(id) {
 	      var isConfirmDelete = confirm('Se eliminará el registro '+id+'. Esta seguro?');
 	      if (isConfirmDelete) {
-	        $http({
-	          method: 'DELETE',
-	          url: API_URL + 'alumno/' + id
-	        }).success(function(data){
-	          console.log(data);
-	          location.reload();
-	        }).error(function(data){
-	          console.log(data);
-	          alert('No se puede borrar un alumno inscripto a materias');
-	        });
+		  	usuariosService.deleteUsuario(id);
+		  	location.reload(true);
 	      } else {
 	        return false;
 	      }

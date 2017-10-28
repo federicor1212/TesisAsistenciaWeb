@@ -29,7 +29,7 @@ Route::post('/identity','UsuarioController@getAuthenticatedUser');
 Route::get('/usuario/{id?}', 'UsuarioController@index');
 Route::post('/crear-usuario', 'UsuarioController@store');
 Route::post('/actualizar-usuario/{id}', 'UsuarioController@update');
-Route::delete('/eliminar-usuario/{id}', 'UsuarioController@destroy');
+Route::post('/eliminar-usuario', 'UsuarioController@destroy');
 
 //Alumnos
 Route::get('/alumno/{id?}', 'AlumnoController@index');

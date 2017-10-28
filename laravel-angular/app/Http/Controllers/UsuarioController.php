@@ -9,6 +9,7 @@ use App\Enums\Status;
 use App\Enums\UserRoles;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller
 {
@@ -49,31 +50,40 @@ class UsuarioController extends Controller
     }
 
     public function store(Request $request) {
-        $usuario = new Usuario;
+        if ($request->input('usuarioid') != null) {
+            $usuario = Usuario::find($request->input('usuarioid'));
+        } else {
+            $usuario = new Usuario;
+        }
+
         $usuario->nombre = $request->input('nombre');
         $usuario->apellido = $request->input('apellido');
         $usuario->email = $request->input('email');
         $usuario->password = Hash::make($request->input('password'));
-        $usuario->permiso = $request->input('permiso');
-        $usuario->estado = $request->input('estado');
+        if ($request->input('permiso') === 'Administrador') {
+            $usuario->permiso = UserRoles::ADMIN;
+        } else {
+            $usuario->permiso = UserRoles::DOCENTE;
+        }
+
+        if ($request->input('estado') === 'Activo') {
+            $usuario->estado = Status::ACTIVO;
+        } else {
+            $usuario->estado = Status::INACTIVO;
+        }
         $usuario->save();
 
-        return 'Usuario record successfully created with id' . $usuario->id;
+        return 'Usuario record successfully saved with id' . $usuario->id;
     }
     
-    public function update(Request $request, $id) {
-        $usuario = Usuario::find($id);
-        $usuario->nombre = $request->input('nombre');
-        $usuario->apellido = $request->input('apellido');
-        $usuario->email = $request->input('email');
-        $usuario->password = Hash::make($request->input('password'));
-        $usuario->permiso = $request->input('permiso');
-        $usuario->estado = $request->input('estado');
-        $usuario->save();
-        return 'Usuario record successfully updated with id ' . $usuario->id;
-    }
-    public function destroy($id) {
-        $usuario = Usuario::find($id)->delete();
-        return 'Usuario record successfully deleted';
+    public function destroy(Request $request) {
+        $userToDelete = $request->input('0');
+
+        if ($userToDelete != null) {
+            $usuario = Usuario::find($userToDelete)->delete();
+            return 'Usuario record successfully deleted';
+        } else {
+            return 'Hubo un problema eliminando el usuario';
+        }
     }
 }

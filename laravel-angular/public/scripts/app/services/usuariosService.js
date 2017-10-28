@@ -13,6 +13,10 @@ function usuariosService($log, $http, $auth) {
     return $http({ method: "GET", url: '/api/usuario', cache: false });
   }
 
+  function deleteUsuario(id) {
+    return $http({ method: "POST", url: '/api/eliminar-usuario', data:id});
+  }
+
   function guardarUsuario(usuario) {
     return $http({ method: "POST", url: '/api/crear-usuario', data: usuario});
   }
@@ -24,7 +28,8 @@ function usuariosService($log, $http, $auth) {
   const service = {
     getUsuarios,
     guardarUsuario,
-    getUserIdentity
+    getUserIdentity,
+    deleteUsuario
   };
 
   return service;

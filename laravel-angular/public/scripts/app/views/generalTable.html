@@ -239,6 +239,7 @@
 	        <h4 class="modal-title" id="myModalLabel">Gestion de Usuario</h4>
 	      </div>
 	      <div class="modal-body">
+	      	<input type="hidden" value="{{modal.usuarioid}}" id="iduser">
 	        <form name="frmUsuario" class="form-horizontal" novalidate="">
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Nombre</label>
@@ -264,20 +265,16 @@
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Permiso</label>
 	            <div class="col-sm-9">
-	              <select class="form-control" id="apellido" name="apellido" placeholder="Ingrese el Permiso" value="{{permiso}}" ng-model="modal.permiso" ng-required="true">
-	              	<option value="1">Administrador</option>
-	              	<option value="2" selected="selected">Docente</option>
-	              </select>
+	            <select id="materia" class="form-control" name="materia" placeholder="Seleccione Permiso" value="{{permiso}}" ng-model="modal.permiso" ng-options="x for x in permisos" ng-required="true">
+				</select>
 	               <span style="color:red" ng-show="frmUsuario.apellido.$invalid && frmUsuario.apellido.$touched">El campo Permiso es obligatorio</span>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Estado</label>
 	            <div class="col-sm-9">
-	              <select class="form-control" id="apellido" name="apellido" placeholder="Ingrese el Estado" value="{{estado}}" ng-model="modal.estado" ng-required="true">
-	              	<option value="1"> Activo</option>
-	              	<option value="0"> Inactivo</option>
-	              </select>
+	             <select id="materia" class="form-control" name="materia" placeholder="Seleccione Permiso" value="{{estado}}" ng-model="modal.estado" ng-options="x for x in estados" ng-required="true">
+				 </select>
 	              <span style="color:red" ng-show="frmUsuario.apellido.$invalid && frmUsuario.apellido.$touched">El campo Estado es obligatorio</span>
 	            </div>
 	          </div>  
