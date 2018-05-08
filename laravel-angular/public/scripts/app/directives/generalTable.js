@@ -13,13 +13,44 @@ angular
     controller: function (alumnoService, carrerasService, dictadosService, docentesAsignadosService, docentesService, inscriptosService, materiasService, usuariosService, $scope, $location, $auth, $state) {
 		  var table = this;
 		  
-		  table.saveUsuario = function(alumno) {
-		    usuariosService.guardarUsuario(alumno);
+		  table.saveUsuario = function(usuario) {
+			usuario.nuevo ? usuariosService.guardarUsuario(usuario) : usuariosService.actualizarUsuario(usuario);
 		    location.reload(true);
 		  }
 
 		  table.saveAlumno = function(alumno) {
-		    alumnoService.guardarAlumno(alumno);
+			alumno.nuevo ? alumnoService.guardarAlumno(alumno) : alumnoService.actualizarAlumno(alumno);
+		    location.reload(true);
+		  }
+		  
+		  table.saveCarrera = function(carrera) {
+			carrera.nuevo ? carrerasService.guardarCarrera(carrera) : carrerasService.actualizarCarrera(carrera);
+			location.reload(true);
+		  }
+
+		  table.saveDocasignado = function(docAsignado) {
+			docAsignado.nuevo ? docentesAsignadosService.guardarDocenteAsignado(docAsignado) : docentesAsignadosService.actualizarDocenteAsignado(docAsignado);
+			location.reload(true);
+		  }
+
+		  table.saveDictado = function(dictado) {
+			dictado.nuevo ? dictadosService.guardarDictado(dictado) : dictadosService.actualizarDictado(dictado);
+			location.reload(true);
+		  }
+
+		  table.saveDocente = function(docente) {
+			docente.nuevo ? docentesService.guardarDocente(docente) : docentesService.actualizarDocente(docente);
+			location.reload(true);
+		  }
+
+		  table.saveInscripto = function(inscripto) {
+			inscripto.nuevo ? inscriptosService.guardarInscripto(inscripto) : inscriptosService.actualizarInscripto(inscripto);
+		    location.reload(true);
+		  }
+
+		  table.saveMateria = function(materia) {
+			materia.nuevo ? materiasService.guardarMateria(materia) : materiasService.actualizarMateria(materia);
+		    location.reload(true);
 		  }
 
 		  $scope.initScope = function(type) {
@@ -68,6 +99,14 @@ angular
 		  				apellido: null,
 		  				nombre: null
 		  			}
+		  			docentesService.getDocente().then((response) => {
+		  				$scope.docentes = response.data;
+					});
+
+					dictadosService.getDictadoSinProf().then((response) => {
+						$scope.materias = response.data;
+					});
+			  		$scope.cargos = [{desc_cargo: 'Titular', id:1}, {desc_cargo: 'Suplente', id: 2}]
 		  			break;
 
 		  		case 'dictados':
@@ -82,10 +121,12 @@ angular
 		  			}
 
 		  			$scope.modal.materia = {
-		  				desc_mat: null
+		  				desc_mat: null,
+						id: null
 		  			};
-
-		  			$scope.materias = ['Ingenieria de Software I','Ingenieria de Software II','Matematica I','Matematica II'];
+		  			materiasService.getMaterias().then((response) => {
+		  				$scope.materias = response.data;
+		  			});
 		  			break;
 
 		  		case 'docentes':
@@ -110,8 +151,13 @@ angular
 		  				desc_mat: null
 		  			}
 		  			
-		  			$scope.alumnos = ['Ignacio11, Barberis','Gustavo, Medina','Federico, Reale'];
-		  			$scope.materias = ['Tesis','Ingenieria de Software I','Ingenieria de Software II','Matematica I','Matematica II','Matematica III','Ingles','Redes I','Redes II','Sistemas Operativos I'];
+					alumnoService.getAlumnos().then((response) => {
+		  				$scope.alumnos = response.data;
+					})
+
+					materiasService.getMaterias().then((response) => {
+		  				$scope.materias = response.data;
+		  			});
 
 		  			break;
 
@@ -125,8 +171,11 @@ angular
 		  				plan: null
 		  			}
 
-		  			$scope.carreras = ['Licenciatura en Sistemas','Ingenieria en Sistemas'];
-		  			$scope.planes = ['2017'];
+		  			carrerasService.getCarreras().then((response) => {
+		  				$scope.carreras = response.data;
+		  			})
+
+		  			$scope.planes = ['2017','2018','2019','2020'];
 
 		  			break;
 
@@ -138,6 +187,7 @@ angular
 
 		  table.openModal = function(type) {
 			$scope.initScope(type);
+			$scope.modal.nuevo = true;
 			switch(type) {
 			    case 'alumno':
 		  			$('#modal-alumno').modal('show');
@@ -186,12 +236,16 @@ angular
 						$scope.modal.telefono = data.telefono;
 						$scope.modal.email = data.email;
 						$scope.modal.matricula = data.matricula;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-alumno').modal('show');
 						break;
 
 					case 'carreras':
 						$scope.modal.desc_carr = data.desc_carr;
 						$scope.modal.plan = data.plan;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-carrera').modal('show');
 						break;
 
@@ -202,22 +256,26 @@ angular
 						$scope.modal.permiso = data.permiso;
 						$scope.modal.estado = data.estado;
 						$scope.modal.usuarioid = data.id;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-usuario').modal('show');
 						break;
 
 					case 'docenteasignado':
-						$scope.modal.materia.desc_mat = data.materia.desc_mat;
+						$scope.modal.materia = data.materia;
 						$scope.modal.docente.apellido = data.docente.apellido;
 						$scope.modal.docente.nombre = data.docente.nombre;
 						$scope.modal.desc_cargo = data.desc_cargo;
 						$scope.email = data.email;
 						$scope.matricula = data.matricula; 
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-docasignado').modal('show');
 
 						break;
 
 					case 'dictados':
-						$scope.modal.materia.desc_mat = data.materia.desc_mat;
+						$scope.modal.materia = data.materia;
 						$scope.modal.cuat = data.cuat;
 						$scope.modal.ano = data.ano;
 						$scope.modal.dia_cursada = data.dia_cursada;
@@ -225,6 +283,8 @@ angular
 						$scope.modal.cant_insc_act = data.cant_insc_act;
 						$scope.modal.cant_clases = data.cant_clases;
 						$scope.modal.cant_faltas_max = data.cant_faltas_max;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-dictado').modal('show');
 						break;
 						
@@ -232,34 +292,87 @@ angular
 						$scope.modal.nombre = data.nombre;
 						$scope.modal.apellido = data.apellido;
 						$scope.modal.telefono = data.telefono;
+						$scope.modal.id = data.id;
 						$('#modal-docente').modal('show');
 						break;
 
 					case 'inscriptos':
-						$scope.modal.alumno.nombre = data.alumno.nombre;
-						$scope.modal.alumno.apellido = data.alumno.apellido;
-						$scope.modal.materia.desc_mat = data.materia.desc_mat;
+						$scope.modal.alumno = data.alumno;
+						$scope.modal.materia = data.materia;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
+						$scope.modal.cant_faltas_act = data.cant_faltas_act;
 						$('#modal-inscripto').modal('show');
 						break;
 						
 					case 'materias':
-						$scope.modal.carrera.desc_carr = data.carrera.desc_carr;
-						$scope.modal.carrera.plan = data.carrera.plan;
-						$scope.modal.desc_mat = data.desc_mat; 
+						$scope.modal.carrera = data.carrera;
+						$scope.modal.desc_mat = data.desc_mat;
+						$scope.modal.nuevo = false;
+						$scope.modal.id = data.id;
 						$('#modal-materia').modal('show');
 						break;
 
 					default:
 						break;
 				}
+			} else { 
+				$scope.modal.nuevo = true;
 			}
 		}
 
-	    table.confirmDelete = function(id) {
+	    table.confirmDelete = function(id, type) {
 	      var isConfirmDelete = confirm('Se eliminará el registro '+id+'. Esta seguro?');
 	      if (isConfirmDelete) {
-		  	usuariosService.deleteUsuario(id);
-		  	location.reload(true);
+			  switch (type) {
+					case 'alumno':
+						alumnoService.borrarAlumno(id).then(() => {
+							location.reload(true);
+						});
+					break;
+
+					case 'carreras':
+						carrerasService.borrarCarrera(id).then((response) => {
+							location.reload(true);
+						});
+					break;
+
+					case 'usuarios':
+						usuariosService.borrarUsuario(id).then(() => {
+							location.reload(true);
+						});
+					break;
+
+					case 'docenteasignado':
+						docentesAsignadosService.borrarDocenteAsignado(id).then(() => {
+							location.reload(true);
+						});
+					break;
+
+					case 'dictados':
+						dictadosService.borrarDictado(id).then(() => {
+							location.reload(true);
+						});
+					break;
+						
+					case 'docentes':
+						docentesService.borrarDocente(id).then(() => {
+							location.reload(true);
+						});
+					break;
+
+					case 'inscriptos':
+						inscriptosService.borrarInscripto(id).then(() => {
+							location.reload(true);
+						});
+					break;
+						
+					case 'materias':
+						materiasService.borrarMateria(id).then(() => {
+							location.reload(true);
+						});
+					break;
+				}
 	      } else {
 	        return false;
 	      }

@@ -17,9 +17,20 @@ function alumnoService($log, $http, $auth) {
     return $http({ method: "POST", url: '/api/crear-alumno', data: alumno});
   }
 
+  function actualizarAlumno(alumno) {
+    return $http({ method: "POST", url: '/api/actualizar-alumno/' + alumno.id, data: alumno});
+  }
+
+  function borrarAlumno(alumno) {
+    return $http({ method: "POST", url: '/api/eliminar-alumno/' + alumno});
+  }
+
+
   const service = {
     getAlumnos,
-    guardarAlumno
+    guardarAlumno,
+    actualizarAlumno,
+    borrarAlumno
   };
 
   return service;

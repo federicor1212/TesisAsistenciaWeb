@@ -20,11 +20,11 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
 	    <tr ng-if="type === 'alumno'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
@@ -37,13 +37,13 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'carreras'" ng-repeat="d in data">
+			<tr ng-if="type === 'carreras'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.desc_carr}}</td>
 	      <td>{{d.plan}}</td>
@@ -51,13 +51,13 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'docenteasignado'" ng-repeat="d in data">
+			<tr ng-if="type === 'docenteasignado'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.materia.desc_mat}}</td>
 	      <td>{{d.docente.apellido}}, {{d.docente.nombre}}</td>
@@ -65,16 +65,13 @@
 	      <td>{{d.email}}</td>
 	      <td>{{d.matricula}}</td>
 	      <td>
-	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
-	          <span class="glyphicon glyphicon-edit"></span>
-	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'dictados'" ng-repeat="d in data">
+			<tr ng-if="type === 'dictados'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.materia.desc_mat}}</td>
 	      <td>{{d.cuat}}</td>
@@ -88,13 +85,13 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'docentes'" ng-repeat="d in data">
+			<tr ng-if="type === 'docentes'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.nombre}}</td>
 	      <td>{{d.apellido}}</td>
@@ -103,13 +100,13 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'inscriptos'" ng-repeat="d in data">
+			<tr ng-if="type === 'inscriptos'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.alumno.nombre}}, {{d.alumno.apellido}}</td>
 	      <td>{{d.materia.desc_mat}}</td>
@@ -118,13 +115,13 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
-        <tr ng-if="type === 'materias'" ng-repeat="d in data">
+			<tr ng-if="type === 'materias'" ng-repeat="d in data">
 	      <td>{{d.id}}</td>
 	      <td>{{d.desc_mat}}</td>
 	      <td>{{d.carrera.desc_carr}}</td>
@@ -133,11 +130,11 @@
 	        <button class="btn btn-warning btn-xs btn-detail" ng-click="table.openEditModal(d,type)">
 	          <span class="glyphicon glyphicon-edit"></span>
 	        </button>
-	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id)">
+	        <button class="btn btn-danger btn-xs btn-delete" ng-click="table.confirmDelete(d.id, type)">
 	          <span class="glyphicon glyphicon-trash"></span>
 	        </button>
 	      </td>
-        </tr>
+			</tr>
 
 	  </tbody>
 	</table>
@@ -224,7 +221,7 @@
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmAlumno.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveCarrera(modal)" ng-disabled="frmCarrera.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -293,28 +290,41 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">×</span>
 	        </button>
-	        <h4 class="modal-title" id="myModalLabel">Gestion de docente asignado</h4>
+	        <h4 class="modal-title" id="myModalLabel">Asignar un docente a una materia - Nuevo</h4>
 	      </div>
 	      <div class="modal-body">
-	        <form name="frmAlumno" class="form-horizontal" novalidate="">
+	        <form name="frmDocAsignado" class="form-horizontal" novalidate="">
 	          <div class="form-group">
-	            <label class="col-sm-3 control-label">Nombre</label>
+	            <label class="col-sm-3 control-label">Materia</label>
 	            <div class="col-sm-9">
-	              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el Nombre" value="{{nombre}}" ng-model="modal.desc_carr" ng-required="true">
-	              <span style="color:red" ng-show="frmAlumno.nombre.$invalid && frmAlumno.nombre.$touched">El campo nombre es obligatorio</span>
+            		<select id="materia" class="form-control" name="materia" placeholder="Seleccione Materia" ng-model="modal.id_materia">
+							<option value="{{x.id}}" ng-repeat="x in materias">{{x.materia.desc_mat}}</option>
+					</select>
+	              	<span style="color:red" ng-show="frmDocAsignado.materia.$invalid && frmDocAsignado.materia.$touched">Seleccionar una materia es obligatorio</span>
+	            </div>
+	          </div> 
+	          <div class="form-group">
+	            <label class="col-sm-3 control-label">Docente</label>
+	            <div class="col-sm-9">
+            		<select id="docente" class="form-control" name="docente" placeholder="Seleccione docente" ng-model="modal.id_docente">
+							<option value="{{x.id}}" ng-repeat="x in docentes">{{x.apellido}} , {{x.nombre}}</option>
+					</select>
+	              	<span style="color:red" ng-show="frmDocAsignado.docente.$invalid && frmDocAsignado.docente.$touched">Seleccionar un docente es obligatorio</span>
 	            </div>
 	          </div>
 	          <div class="form-group">
-	            <label class="col-sm-3 control-label">Plan</label>
+	            <label class="col-sm-3 control-label">Cargo</label>
 	            <div class="col-sm-9">
-	              <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese el Apellido" value="{{apellido}}" ng-model="modal.plan" ng-required="true">
-	              <span style="color:red" ng-show="frmAlumno.apellido.$invalid && frmAlumno.apellido.$touched">El campo Apellido es obligatorio</span>
+            		<select id="cargo" class="form-control" name="cargo" placeholder="Seleccione cargo" ng-model="modal.id_cargo">
+							<option value="{{x.id}}" ng-repeat="x in cargos">{{x.desc_cargo}}</option>
+					</select>
+	              	<span style="color:red" ng-show="frmDocAsignado.cargo.$invalid && frmDocAsignado.cargo.$touched">Seleccionar un cargo es obligatorio</span>
 	            </div>
-	          </div>  
+	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmAlumno.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveDocasignado(modal)" ng-disabled="frmDocAsignado.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -333,8 +343,9 @@
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Materia</label>
 	            <div class="col-sm-9">
-	            <select id="materia" class="form-control" name="materia" placeholder="Seleccione Materia" value="{{desc_mat}}" ng-model="modal.materia.desc_mat" ng-options="x for x in materias">
-				</select>
+	            <select id="materia" class="form-control" name="materia" placeholder="Seleccione Materia" ng-model="modal.id_materia">
+								<option value="{{x.id}}" ng-repeat="x in materias">{{x.desc_mat}}</option>
+							</select>
 	              <span style="color:red" ng-show="frmDictado.materia.$invalid && frmDictado.materia.$touched">Seleccionar una materia es obligatorio</span>
 	            </div>
 	          </div>
@@ -409,7 +420,7 @@
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmDictado.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveDictado(modal)" ng-disabled="frmDictado.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -449,7 +460,7 @@
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmDocente.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveDocente(modal)" ng-disabled="frmDocente.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -468,16 +479,18 @@
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Nombre</label>
 	            <div class="col-sm-9">
-	            <select id="nombre" class="form-control" name="nombre" placeholder="Seleccione Alumno" value="{{nombre}}" ng-model="modal.alumno.nombre" ng-options="x for x in alumnos" ng-required="true">
-				</select>
+	            <select id="nombre" class="form-control" name="nombre" placeholder="Seleccione Alumno" ng-model="modal.alumno" ng-required="true">
+								<option ng-repeat="x in alumnos" value="{{x.id}}"> {{x.nombre}}, {{x.apellido}}</option>
+							</select>
 	              <span style="color:red" ng-show="frmInscriptos.nombre.$invalid && frmInscriptos.nombre.$touched">El campo nombre es obligatorio</span>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Materia</label>
 	            <div class="col-sm-9">
-	            <select id="materia" class="form-control" name="materia" placeholder="Seleccione Materia" value="{{desc_mat}}" ng-model="modal.materia.desc_mat" ng-options="x for x in materias" ng-required="true">
-				</select>
+	            <select id="materia" class="form-control" name="materia" placeholder="Seleccione Materia" ng-model="modal.id_materia">
+								<option value="{{x.id}}" ng-repeat="x in materias">{{x.desc_mat}}</option>
+							</select>
 	              <span style="color:red" ng-show="frmInscriptos.materia.$invalid && frmInscriptos.materia.$touched">Seleccionar una materia es obligatorio</span>
 	            </div>
 	          </div> 
@@ -491,7 +504,7 @@
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmInscriptos.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveInscripto(modal)" ng-disabled="frmInscriptos.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>
@@ -506,32 +519,32 @@
 	        <h4 class="modal-title" id="myModalLabel">Gestion de Materia</h4>
 	      </div>
 	      <div class="modal-body">
-	        <form name="frmAlumno" class="form-horizontal" novalidate="">
+	        <form name="frmMateria" class="form-horizontal" novalidate="">
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Nombre</label>
 	            <div class="col-sm-9">
 	              <input type="text" class="form-control" id="desc_mat" name="desc_mat" placeholder="Ingrese el Nombre" value="{{desc_mat}}" ng-model="modal.desc_mat" ng-required="true">
-	              <span style="color:red" ng-show="frmAlumno.desc_mat.$invalid && frmAlumno.desc_mat.$touched">El campo nombre es obligatorio</span>
+	              <span style="color:red" ng-show="frmMateria.desc_mat.$invalid && frmMateria.desc_mat.$touched">El campo nombre es obligatorio</span>
 	            </div>
 	          </div>
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Carrera</label>
 	            <div class="col-sm-9">
 	              <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Seleccione la carrera" value="{{carrera}}" ng-model="modal.carrera.desc_carr" ng-required="true">
-	              <span style="color:red" ng-show="frmAlumno.carrera.$invalid && frmAlumno.carrera.$touched">Seleccionar una carrera es obligatorio</span>
+	              <span style="color:red" ng-show="frmMateria.carrera.$invalid && frmMateria.carrera.$touched">Seleccionar una carrera es obligatorio</span>
 	            </div>
 	          </div>  
 	          <div class="form-group">
 	            <label class="col-sm-3 control-label">Plan</label>
 	            <div class="col-sm-9">
 	              <input type="text" class="form-control" id="plan" name="plan" placeholder="Seleccione el plan" value="{{plan}}" ng-model="modal.carrera.plan" ng-required="true">
-	              <span style="color:red" ng-show="frmAlumno.plan.$invalid && frmAlumno.plan.$touched">Seleccionar un plan es obligatorio</span>
+	              <span style="color:red" ng-show="frmMateria.plan.$invalid && frmMateria.plan.$touched">Seleccionar un plan es obligatorio</span>
 	            </div>
 	          </div>  
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.save(modal)" ng-disabled="frmAlumno.$invalid">Guardar</button>
+	        <button type="button" class="btn btn-primary" id="btn-save" ng-click="table.saveMateria(modal)" ng-disabled="frmMateria.$invalid">Guardar</button>
 	      </div>
 	    </div>
 	  </div>

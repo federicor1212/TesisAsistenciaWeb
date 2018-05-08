@@ -13,13 +13,24 @@ function inscriptosService($log, $http, $auth) {
     return $http({ method: "GET", url: '/api/inscripto', cache: false });
   }
 
-  function guardarInscriptos(inscripto) {
+  function guardarInscripto(inscripto) {
     return $http({ method: "POST", url: '/api/nuevo-inscripto', data: inscripto});
   }
 
+  function actualizarInscripto(inscripto) {
+    return $http({ method: "POST", url: '/api/actualizar-inscripto/' + inscripto.id, data: inscripto});
+  }
+
+  function borrarInscripto(inscripto) {
+    return $http({ method: "POST", url: '/api/eliminar-inscripto/' + inscripto});
+  }
+
+
   const service = {
     getInscriptos,
-    guardarInscriptos
+    guardarInscripto,
+    actualizarInscripto,
+    borrarInscripto
   };
 
   return service;

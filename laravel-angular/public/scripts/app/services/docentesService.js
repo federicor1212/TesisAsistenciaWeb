@@ -13,13 +13,23 @@ function docenteService($log, $http, $auth) {
     return $http({ method: "GET", url: '/api/docente', cache: false });
   }
 
-  function guardarDocente(docentes) {
+  function guardarDocente(docente) {
     return $http({ method: "POST", url: '/api/nuevo-docente', data: docente});
+  }
+
+  function actualizarDocente(docente) {
+    return $http({ method: "POST", url: '/api/actualizar-docente/' + docente.id, data: docente});
+  }
+
+  function borrarDocente(docente) {
+    return $http({ method: "POST", url: '/api/eliminar-docente/' + docente});
   }
 
   const service = {
     getDocente,
-    guardarDocente
+    guardarDocente,
+    actualizarDocente,
+    borrarDocente
   };
 
   return service;

@@ -15,12 +15,12 @@ class AsignadoController extends Controller
         $asignado = Asignado::all();
         $docentes = Docente::all();
         $materias = Materia::all();
-        $dictados = Dictado::all();
 
         foreach ($asignado as $asign) {
-            $asign['docente'] = $docentes->find($asign['docente_id']);
-            $asign['dictado'] = $dictados->find($asign['dictado_id']);
-            $asign['materia'] = $materias->find($asign['dictado']->id_materia);
+            $asign['docente'] = $docentes->find($asign['id_docente']);
+            $dictInfo = Dictado::where('id',$asign['id_dictado'])->first();
+            $asign['dictado'] = $dictInfo;
+            $asign['materia'] = $materias->find($dictInfo['id_materia']);
             unset($asign['dictado']);
         }
         return $asignado;
@@ -35,9 +35,13 @@ class AsignadoController extends Controller
 
     public function store(Request $request) {
         $asignado = new Asignado;
-        $asignado->id_dictado = $request->input('id_dictado');
+        $asignado->id_dictado = $request->input('id_materia');
         $asignado->id_docente = $request->input('id_docente');
-        $asignado->desc_cargo = $request->input('desc_cargo');
+        if ($request->input('id_cargo') == 1) {
+            $asignado->desc_cargo = 'Titular';
+        } else {
+            $asignado->desc_cargo = 'Suplente';
+        }
         $asignado->save();
         return 'Asignado record successfully created with id' . $asignado->id;
     }
@@ -50,8 +54,9 @@ class AsignadoController extends Controller
         $asignado->save();
         return 'Asignado record successfully updated with id ' . $asignado->id;
     }
+    
     public function destroy($id) {
-        $asignado = Asignado::find($id)->delete();
+        $asignado = Asignado::find($id)->destroy();
         return 'Asignado record successfully deleted';
     }
 }

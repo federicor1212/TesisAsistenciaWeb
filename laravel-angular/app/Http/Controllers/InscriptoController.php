@@ -53,7 +53,12 @@ class InscriptoController extends Controller
         return 'Inscripto record successfully updated with id ' . $inscripto->id;
     }
     public function destroy($id) {
-        $inscripto = Inscripto::find($id)->delete();
+        try {
+            $inscripto = Inscripto::find($id)->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            var_dump('PEPE'.$e);
+            return false;
+        }
         return 'Inscripto record successfully deleted';
     }
 }

@@ -17,9 +17,19 @@ function docentesAsignadosService($log, $http, $auth) {
     return $http({ method: "POST", url: '/api/asignar-docente', data: docenteAsignado});
   }
 
+  function actualizarDocenteAsignado(docenteAsignado) {
+    return $http({ method: "POST", url: '/api/actualizar-asignacion/' + docenteAsignado.id, data: docenteAsignado});
+  }
+
+  function borrarDocenteAsignado(docente) {
+    return $http({ method: "POST", url: '/api/eliminar-asignacion/' + docente});
+  }
+
   const service = {
     getDocenteAsignado,
-    guardarDocenteAsignado
+    guardarDocenteAsignado,
+    actualizarDocenteAsignado,
+    borrarDocenteAsignado
   };
 
   return service;

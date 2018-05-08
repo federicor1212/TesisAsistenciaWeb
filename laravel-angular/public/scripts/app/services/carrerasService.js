@@ -14,12 +14,22 @@ function carrerasService($log, $http, $auth) {
   }
 
   function guardarCarrera(carrera) {
-    return $http({ method: "POST", url: '/api/crear-carrera', data: carreras});
+    return $http({ method: "POST", url: '/api/crear-carrera', data: carrera});
+  }
+
+  function actualizarCarrera(carrera) {
+    return $http({ method: "POST", url: '/api/actualizar-carrera/' + carrera.id, data: carrera});
+  }
+  
+  function borrarCarrera(carrera) {
+    return $http({ method: "POST", url: '/api/eliminar-carrera/' + carrera});
   }
 
   const service = {
     getCarrera,
-    guardarCarrera
+    guardarCarrera,
+    actualizarCarrera,
+    borrarCarrera
   };
 
   return service;

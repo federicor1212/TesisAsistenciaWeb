@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dictado;
 use App\Materia; 
+use App\Asignado;
+use DB;
 
 class DictadoController extends Controller
 {
@@ -22,6 +24,25 @@ class DictadoController extends Controller
       } else {
         return Dictado::find($id);
       }
+    }
+
+    public function dictadosSinProfesor(){
+        $allDictados = Dictado::all();
+        $allAsignados = Asignado::select(DB::raw('id_dictado, count(id_dictado) as cant_asignada'))->groupBy('id_dictado')->get();
+
+        foreach ($allDictados as $dict) {
+            $lookupDictado = $allAsignados->where('id_dictado',$dict['id'])->first();
+            $dict['materia'] = Materia::where('id',$dict['id_materia'])->first();
+            if (count($lookupDictado) > 0) {
+                if ($lookupDictado['cant_asignada'] < 2) {
+                    $dictadoToDisplay[] = $dict;
+                }
+            } else {
+                $dictadoToDisplay[] = $dict;
+            }
+        }
+
+        return $dictadoToDisplay;
     }
 
     public function show($id) {

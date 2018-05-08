@@ -10,7 +10,7 @@ class DocenteController extends Controller
     public function index($id = null) {
       
       if ($id == null){
-        return Docente::all();
+        return Docente::all()->toArray();
       } else {
         return Docente::find($id);
       }

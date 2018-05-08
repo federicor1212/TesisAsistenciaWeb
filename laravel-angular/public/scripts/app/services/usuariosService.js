@@ -21,6 +21,14 @@ function usuariosService($log, $http, $auth) {
     return $http({ method: "POST", url: '/api/crear-usuario', data: usuario});
   }
 
+  function actualizarUsuario(usuario) {
+    return $http({ method: "POST", url: '/api/actualizar-usuario/' + usuario.id, data: usuario});
+  }
+
+  function borrarUsuario(usuario) {
+    return $http({ method: "POST", url: '/api/eliminar-usuario/' + usuario});
+  }
+
   function getUserIdentity() {
     return $http({ method: "POST", url: '/api/identity', data: {'token': localStorage.getItem('token')} })
   }
@@ -29,7 +37,8 @@ function usuariosService($log, $http, $auth) {
     getUsuarios,
     guardarUsuario,
     getUserIdentity,
-    deleteUsuario
+    actualizarUsuario,
+    borrarUsuario
   };
 
   return service;
